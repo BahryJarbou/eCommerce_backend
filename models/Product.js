@@ -22,3 +22,5 @@ const Product = sequelize.define(
     timestamps: false,
   }
 );
+
+export default Product
