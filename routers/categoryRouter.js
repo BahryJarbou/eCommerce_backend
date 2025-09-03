@@ -1,19 +1,24 @@
 import { Router } from "express";
+import validateSchema from "../middlewares/validateSchema.js";
+import CategorySchema from "../schemas/categorySchema.js";
 import {
   getCategories,
-  createCategory,
   getCategoryById,
+  createCategory,
   updateCategory,
   deleteCategory,
 } from "../controllers/categories.js";
 
 const categoryRouter = Router();
 
-//
-categoryRouter.get("/", getCategories); // GET all categories
-categoryRouter.post("/", createCategory); // CREATE new category
-categoryRouter.get("/:id", getCategoryById); // GET category by id
-categoryRouter.put("/:id", updateCategory); // UPDATE category
-categoryRouter.delete("/:id", deleteCategory); // DELETE category
+// routes
+categoryRouter.route("/").get(getCategories);
+categoryRouter.route("/:id").get(getCategoryById);
+categoryRouter.route("/:id").delete(deleteCategory);
+
+//validation middleware for POST and PUT
+categoryRouter.use(validateSchema(CategorySchema));
+categoryRouter.route("/").post(createCategory);
+categoryRouter.route("/:id").put(updateCategory);
 
 export default categoryRouter;
