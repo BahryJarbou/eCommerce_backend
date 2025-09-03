@@ -1,7 +1,10 @@
+import { id } from "zod/locales";
 import User from "../models/User.js";
 
 const getUsers = async (req, res) => {
-  const users = await User.findAll();
+  const users = await User.findAll({
+    attributes: ["id", "name", "email"],
+  });
   res.json(users);
 };
 
@@ -9,7 +12,9 @@ const createUser = async (req, res) => {
   const {
     body: { name, email, password },
   } = req;
-  const found = await User.findOne({ where: { email } });
+  const found = await User.findOne({
+    where: { email },
+  });
   if (found) throw new Error("User with that email already exists");
   const user = await User.create(req.body);
   res.json(user);
@@ -19,7 +24,9 @@ const getUserById = async (req, res) => {
   const {
     params: { id },
   } = req;
-  const user = await User.findByPk(id);
+  const user = await User.findByPk(id, {
+    attributes: ["id", "name", "email"],
+  });
   if (!user) throw new Error("User Not found", { cause: 404 });
   res.status(200).json({ user });
 };
