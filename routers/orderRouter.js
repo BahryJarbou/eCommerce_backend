@@ -1,5 +1,8 @@
 import { Router } from "express";
-import validateSchema from "../middlewares/validationMiddleware.js";
+import {
+  validateSchema,
+  productsExists,
+} from "../middlewares/validationMiddleware.js";
 import OrderSchema from "../schemas/orderSchema.js";
 import {
   createOrder,
@@ -8,6 +11,7 @@ import {
   updateOrder,
   deleteOrder,
 } from "../controllers/orders.js";
+import Product from "../models/Product.js";
 
 const orderRouter = Router();
 
@@ -16,6 +20,7 @@ orderRouter.route("/:id").get(getOrderById);
 orderRouter.route("/:id").delete(deleteOrder);
 
 orderRouter.use(validateSchema(OrderSchema));
+orderRouter.use(productsExists);
 orderRouter.route("/").post(createOrder);
 orderRouter.route("/:id").put(updateOrder);
 

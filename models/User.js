@@ -14,7 +14,7 @@ const User = sequelize.define(
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
   },
   {
@@ -29,6 +29,4 @@ const User = sequelize.define(
     },
   }
 );
-sequelize.sync();
-
 export default User;
