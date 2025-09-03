@@ -18,8 +18,8 @@ Order.belongsTo(User, {
 
 // orders-porducts associations
 
-Product.belongsToMany({ through: "Orders_Porducts" });
-Order.belongsToMany({ through: "Orders_Products" });
+// Product.belongsToMany(Order, { through: "Orders_Products" });
+// Order.belongsToMany(Product, { through: "Orders_Products" });
 
 // products-categories associations
 Category.hasMany(Product, {

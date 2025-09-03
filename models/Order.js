@@ -4,13 +4,9 @@ import sequelize from "../db/index.js";
 const Order = sequelize.define(
   "Order",
   {
-    userId: {
-      type: DataTypes.INTEGER,
+    products: {
+      type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: false,
-    },
-    status: {
-      type: DataTypes.STRING,
-      defaultValue: "pending",
     },
     total: {
       type: DataTypes.FLOAT,
@@ -18,7 +14,7 @@ const Order = sequelize.define(
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
   }
 );
 

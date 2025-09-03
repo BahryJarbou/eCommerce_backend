@@ -4,8 +4,6 @@ import userRouter from "./routers/userRouter.js";
 import categoryRouter from "./routers/categoryRouter.js";
 import productRouter from "./routers/productRouter.js";
 import orderRouter from "./routers/orderRouter.js";
-import validateSchema from "./middlewares/validationMiddleware.js";
-import UserSchema from "./schemas/userSchema.js";
 
 const app = express();
 const port = process.env.PORT || 8080;
