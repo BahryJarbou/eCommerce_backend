@@ -49,7 +49,7 @@ const deleteUser = async (req, res) => {
   const user = await User.findByPk(id);
   if (!user) throw new Error("User not found", { cause: 404 });
   await user.destroy();
-  res.status(200).json("User deleted successfully");
+  res.status(200).json({ message: "User deleted successfully" });
 };
 
 export { getUsers, createUser, getUserById, updateUser, deleteUser };
